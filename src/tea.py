@@ -1,13 +1,14 @@
 class Tea:
-    def __init__(self, name: str, minutes: int, seconds: int, temperature: int):
+    def __init__(
+        self, name: str, minutes: int, seconds: int, temperature: int, color: str
+    ):
         self.name: str = name
-        self.minutes = minutes
-        self.seconds = seconds
-        self.time = minutes * 60 + seconds
+        self.minutes: int = minutes
+        self.seconds: int = seconds
+        self.time_seconds: int = minutes * 60 + seconds
+        self.time: str = f"{self.minutes:02}:{self.seconds:02}"
         self.temperature: int = temperature
-
-    def get_minutes_seconds(self) -> str:
-        return f"{self.minutes:02}:{self.seconds:02}"
+        self.color: str = color
 
     def __str__(self):
-        return f"{self.name} {self.get_minutes_seconds()} {self.temperature}ºC"
+        return f"{self.name} {self.time} {self.temperature}ºC"

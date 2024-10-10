@@ -35,15 +35,31 @@ class TeatimeWindow(Adw.ApplicationWindow):
         Notify.init("teatime")
 
         teas: List[Tea] = [
-            Tea("Té Verde", 2, 30, 80),
-            Tea("Té Negro", 4, 0, 100),
-            Tea("Té Oolong", 4, 0, 100),
-            Tea("Té Rojo", 4, 30, 95),
-            Tea("Té Blanco", 5, 0, 80),
+            Tea("Té Verde", 2, 30, 80, "#32a852"),
+            Tea("Té Negro", 4, 0, 100, "#575958"),
+            Tea("Té Oolong", 4, 0, 100, "#779bbf"),
+            Tea("Té Rojo", 4, 30, 95, "#bf7791"),
+            Tea("Té Blanco", 5, 0, 80, "#f7f7f7"),
         ]
 
         for tea in teas:
-            button = Gtk.ToggleButton(label=tea)
+            button = Gtk.ToggleButton()
+            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+
+            # Añadir icono
+            icon = Gtk.Image.new_from_icon_name("audio-volume-muted-symbolic")
+            icon.set_icon_size(Gtk.IconSize.LARGE)
+            box.append(icon)
+
+            # Añadir texto con formato
+            label = Gtk.Label()
+
+            markup = f"<span size='large' foreground='{tea.color}'>{tea.name}</span>\n<span>{tea.time} {tea.temperature}ºC</span>\n<span>tg</span>"
+            label.set_markup(markup)
+            box.append(label)
+
+            button.set_child(box)
+
             button.connect("clicked", self.on_button_clicked, tea)
             self.box.append(button)
 
@@ -51,12 +67,10 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
     def on_button_clicked(self, widget, tea):
 
-        notification = Notify.Notification.new(
-            f"Temporizador de {tea.get_minutes_seconds()}"
-        )
+        notification = Notify.Notification.new(f"Temporizador de {tea.time}")
         notification.show()
 
-        self.time_left = tea.time
+        self.time_left = tea.time_seconds
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
         self.update_label(self.task, tea)  # Llama a update_label inmediatamente
