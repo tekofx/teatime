@@ -19,7 +19,7 @@
 
 from typing import List
 from gi.repository import Adw
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, Gio
 from .tea import Tea
 
 
@@ -42,16 +42,24 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
         self.box.set_spacing(10)
 
-    def on_button_clicked(self, widget, time: int):
+    def on_button_clicked(self, widget, time):
         self.time_left = time
-        self.timeout_id = GLib.timeout_add_seconds(1, self.update_label)
-        self.label.set_text("Boton clickado")
+        self.task = Gio.Task.new(self, None, self.on_task_completed)
+        self.task.set_task_data(self.time_left, None)
+        self.update_label(self.task)  # Llama a update_label inmediatamente
+        GLib.timeout_add_seconds(1, self.update_label, self.task)
 
-    def update_label(self):
-        self.time_left -= 1
+    def update_label(self, task):
+
 
         minutes, seconds = divmod(self.time_left, 60)
         self.label.set_text(f"Tiempo restante: {minutes:02}:{seconds:02}")
+        self.time_left -= 1
         if self.time_left == 0:
+            task.return_boolean(True)
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
+
+    def on_task_completed(self, task, result):
+        if task.propagate_boolean(result):
+            self.label.set_text("Tiempo completado")
