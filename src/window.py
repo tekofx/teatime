@@ -47,14 +47,14 @@ class TeatimeWindow(Adw.ApplicationWindow):
             box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
             # Añadir icono
-            icon = Gtk.Image.new_from_icon_name("audio-volume-muted-symbolic")
+            icon = Gtk.Image.new_from_icon_name("tea-symbolic")
             icon.set_icon_size(Gtk.IconSize.LARGE)
             box.append(icon)
 
             # Añadir texto con formato
             label = Gtk.Label()
 
-            markup = f"<span size='large' foreground='{tea.color}'>{tea.name}</span>\n<span>{tea.time} {tea.temperature}ºC</span>\n<span>tg</span>"
+            markup = f"<span size='large' foreground='{tea.color}'>{tea.name}</span>\n<span>{tea.time} {tea.temperature}ºC</span>"
             label.set_markup(markup)
             box.append(label)
 
