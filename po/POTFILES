@@ -1,0 +1,6 @@
+data/dev.tekofx.TeaTime.desktop.in
+data/dev.tekofx.TeaTime.metainfo.xml.in
+data/dev.tekofx.TeaTime.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
