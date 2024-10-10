@@ -20,9 +20,13 @@
           </object>
         </child>
         <child>
+
       <object class="GtkBox" id="box">
         <property name="orientation">vertical</property>
         <child>
+          <object class="GtkLabel" id="label2">
+            <property name="label">Elige un té para empezar a contar</property>
+          </object>
           <object class="GtkLabel" id="label">
             <property name="label">Este es el template</property>
           </object>

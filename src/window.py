@@ -33,24 +33,24 @@ class TeatimeWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        teas: List[Tea] = [Tea("Verde", 180, 90), Tea("Negro", 180, 70)]
+        teas: List[Tea] = [Tea("Té Verde", 180, 90), Tea("Té Negro", 180, 70)]
 
         for tea in teas:
-            button = Gtk.Button(label=tea.name)
-            button.connect("clicked", self.on_button_clicked, tea.time)
+            minutes, seconds = divmod(tea.time, 60)
+            button = Gtk.ToggleButton(label=tea)
+            button.connect("clicked", self.on_button_clicked, tea)
             self.box.append(button)
 
         self.box.set_spacing(10)
 
-    def on_button_clicked(self, widget, time):
-        self.time_left = time
+    def on_button_clicked(self, widget, tea):
+        self.time_left = tea.time
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task)  # Llama a update_label inmediatamente
-        GLib.timeout_add_seconds(1, self.update_label, self.task)
+        self.update_label(self.task, tea)  # Llama a update_label inmediatamente
+        GLib.timeout_add_seconds(1, self.update_label, self.task, tea)
 
-    def update_label(self, task):
-
+    def update_label(self, task, tea):
 
         minutes, seconds = divmod(self.time_left, 60)
         self.label.set_text(f"Tiempo restante: {minutes:02}:{seconds:02}")
