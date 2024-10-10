@@ -17,14 +17,41 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from typing import List
 from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
+from .tea import Tea
 
-@Gtk.Template(resource_path='/dev/tekofx/TeaTime/window.ui')
+
+@Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")
 class TeatimeWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'TeatimeWindow'
+    __gtype_name__ = "TeatimeWindow"
 
     label = Gtk.Template.Child()
+    box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        teas: List[Tea] = [Tea("Verde", 180, 90), Tea("Negro", 180, 70)]
+
+        for tea in teas:
+            button = Gtk.Button(label=tea.name)
+            button.connect("clicked", self.on_button_clicked, tea.time)
+            self.box.append(button)
+
+        self.box.set_spacing(10)
+
+    def on_button_clicked(self, widget, time: int):
+        self.time_left = time
+        self.timeout_id = GLib.timeout_add_seconds(1, self.update_label)
+        self.label.set_text("Boton clickado")
+
+    def update_label(self):
+        self.time_left -= 1
+
+        minutes, seconds = divmod(self.time_left, 60)
+        self.label.set_text(f"Tiempo restante: {minutes:02}:{seconds:02}")
+        if self.time_left == 0:
+            return False  # Detiene el temporizador
+        return True  # Continúa el temporizador

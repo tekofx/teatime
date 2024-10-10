@@ -19,14 +19,16 @@
             </child>
           </object>
         </child>
-        <property name="content">
+        <child>
+      <object class="GtkBox" id="box">
+        <property name="orientation">vertical</property>
+        <child>
           <object class="GtkLabel" id="label">
-            <property name="label">Hello, World!</property>
-            <style>
-              <class name="title-1"/>
-            </style>
+            <property name="label">Este es el template</property>
           </object>
-        </property>
+        </child>
+      </object>
+    </child>
       </object>
     </property>
   </template>
