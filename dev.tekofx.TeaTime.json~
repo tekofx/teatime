@@ -1,7 +1,7 @@
 {
     "id" : "dev.tekofx.TeaTime",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "46",
+    "runtime-version" : "45",
     "sdk" : "org.gnome.Sdk",
     "command" : "teatime",
     "finish-args" : [

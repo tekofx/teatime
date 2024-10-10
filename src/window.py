@@ -19,7 +19,7 @@
 
 from typing import List
 from gi.repository import Adw
-from gi.repository import Gtk, GLib, Gio
+from gi.repository import Gtk, GLib, Gio, Notify
 from .tea import Tea
 
 
@@ -32,11 +32,11 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        Notify.init("teatime")
 
         teas: List[Tea] = [Tea("Té Verde", 180, 90), Tea("Té Negro", 180, 70)]
 
         for tea in teas:
-            minutes, seconds = divmod(tea.time, 60)
             button = Gtk.ToggleButton(label=tea)
             button.connect("clicked", self.on_button_clicked, tea)
             self.box.append(button)
@@ -44,6 +44,12 @@ class TeatimeWindow(Adw.ApplicationWindow):
         self.box.set_spacing(10)
 
     def on_button_clicked(self, widget, tea):
+
+
+        notification = Notify.Notification.new(f"Temporizador de {tea.get_minutes_seconds()}")
+        notification.show()
+
+
         self.time_left = tea.time
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
