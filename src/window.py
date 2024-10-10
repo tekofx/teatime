@@ -34,7 +34,13 @@ class TeatimeWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         Notify.init("teatime")
 
-        teas: List[Tea] = [Tea("Té Verde", 5, 90), Tea("Té Negro", 180, 70)]
+        teas: List[Tea] = [
+            Tea("Té Verde", 2, 30, 80),
+            Tea("Té Negro", 4, 0, 100),
+            Tea("Té Oolong", 4, 0, 100),
+            Tea("Té Rojo", 4, 30, 95),
+            Tea("Té Blanco", 5, 0, 80),
+        ]
 
         for tea in teas:
             button = Gtk.ToggleButton(label=tea)
@@ -45,10 +51,10 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
     def on_button_clicked(self, widget, tea):
 
-
-        notification = Notify.Notification.new(f"Temporizador de {tea.get_minutes_seconds()}")
+        notification = Notify.Notification.new(
+            f"Temporizador de {tea.get_minutes_seconds()}"
+        )
         notification.show()
-
 
         self.time_left = tea.time
         self.task = Gio.Task.new(self, None, self.on_task_completed)
