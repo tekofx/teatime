@@ -34,7 +34,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         Notify.init("teatime")
 
-        teas: List[Tea] = [Tea("Té Verde", 180, 90), Tea("Té Negro", 180, 70)]
+        teas: List[Tea] = [Tea("Té Verde", 5, 90), Tea("Té Negro", 180, 70)]
 
         for tea in teas:
             button = Gtk.ToggleButton(label=tea)
@@ -63,8 +63,9 @@ class TeatimeWindow(Adw.ApplicationWindow):
         self.time_left -= 1
         if self.time_left == 0:
             task.return_boolean(True)
-            notification = Notify.Notification.new(f"Tu {tea.time} está listo")
+            notification = Notify.Notification.new(f"Tu {tea.name} está listo")
             notification.show()
+            self.label.set_text(f"Tu {tea.name} está listo")
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
 
