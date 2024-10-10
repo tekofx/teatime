@@ -32,10 +32,11 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        Notify.init("teatime")
+        self.set_title("Tea Time")
+        Notify.init("Tea Time")
 
         teas: List[Tea] = [
-            Tea("Té Verde", 2, 30, 80, "#32a852"),
+            Tea("Té Verde", 0, 3, 80, "#32a852"),
             Tea("Té Negro", 4, 0, 100, "#575958"),
             Tea("Té Oolong", 4, 0, 100, "#779bbf"),
             Tea("Té Rojo", 4, 30, 95, "#bf7791"),
