@@ -63,6 +63,8 @@ class TeatimeWindow(Adw.ApplicationWindow):
         self.time_left -= 1
         if self.time_left == 0:
             task.return_boolean(True)
+            notification = Notify.Notification.new(f"Tu {tea.time} está listo")
+            notification.show()
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
 
