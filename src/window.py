@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import inspect
 from typing import List
 from gi.repository import Adw
 from gi.repository import Gtk, GLib, Gio, Notify
@@ -74,10 +75,10 @@ class TeatimeWindow(Adw.ApplicationWindow):
         self.time_left = tea.time_seconds
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task, tea)  # Llama a update_label inmediatamente
-        GLib.timeout_add_seconds(1, self.update_label, self.task, tea)
+        self.update_label(self.task, widget, tea)  # Llama a update_label inmediatamente
+        GLib.timeout_add_seconds(1, self.update_label, self.task, widget, tea)
 
-    def update_label(self, task, tea):
+    def update_label(self, task, widget, tea):
 
         minutes, seconds = divmod(self.time_left, 60)
         self.label.set_text(f"Tiempo restante: {minutes:02}:{seconds:02}")
@@ -86,6 +87,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
             task.return_boolean(True)
             notification = Notify.Notification.new(f"Tu {tea.name} está listo")
             notification.show()
+            widget.set_active(False)
             self.label.set_text(f"Tu {tea.name} está listo")
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
