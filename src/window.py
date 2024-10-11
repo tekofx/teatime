@@ -27,8 +27,7 @@ from .tea import Tea
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")
 class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
-
-    label = Gtk.Template.Child()
+    box2 = Gtk.Template.Child()
     box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -65,7 +64,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
             button.connect("clicked", self.on_button_clicked, tea)
             self.box.append(button)
 
-        self.box.set_spacing(10)
+
 
     def on_button_clicked(self, widget, tea):
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
     <property name="default-width">600</property>
     <property name="default-height">300</property>
@@ -19,20 +19,29 @@
             </child>
           </object>
         </child>
-        <child>
 
-      <object class="GtkBox" id="box">
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="label2">
-            <property name="label">Elige un té para empezar a contar</property>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Elige un té para empezar a contar</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkFlowBox" id="box">
+                <property name="column-spacing">5</property>
+                <property name="homogeneous">True</property>
+                <property name="max-children-per-line">5</property>
+
+              </object>
+            </child>
           </object>
-          <object class="GtkLabel" id="label">
-            <property name="label">Este es el template</property>
-          </object>
+
+
         </child>
-      </object>
-    </child>
+
+
       </object>
     </property>
   </template>
