@@ -20,7 +20,7 @@
 import inspect
 from typing import List
 from gi.repository import Adw
-from gi.repository import Gtk, GLib, Gio, Notify
+from gi.repository import Gtk, GLib, Gio, Notify, GdkPixbuf
 from .tea import Tea
 
 
@@ -29,7 +29,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
 
     box = Gtk.Template.Child()
-    label=Gtk.Template.Child()
+    label = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -42,14 +42,14 @@ class TeatimeWindow(Adw.ApplicationWindow):
             Tea("Té Oolong", 4, 0, 100, "#779bbf"),
             Tea("Té Rojo", 4, 30, 95, "#bf7791"),
             Tea("Té Blanco", 5, 0, 80, "#f7f7f7"),
+            Tea("Té Menta", 5, 0, 80, "#f7f7f7"),
         ]
 
         for tea in teas:
             button = Gtk.ToggleButton()
             box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-            # Añadir icono
-            icon = Gtk.Image.new_from_file("test.jpg")
+            icon = Gtk.Image.new_from_icon_name("tea-symbolic")
             icon.set_icon_size(Gtk.IconSize.LARGE)
             box.append(icon)
 
@@ -64,8 +64,6 @@ class TeatimeWindow(Adw.ApplicationWindow):
 
             button.connect("clicked", self.on_button_clicked, tea)
             self.box.append(button)
-
-
 
     def on_button_clicked(self, widget, tea):
 

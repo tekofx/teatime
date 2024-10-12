@@ -3,6 +3,7 @@ application_id = 'dev.tekofx.TeaTime'
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(
   scalable_dir / ('@0@.svg').format(application_id),
+  scalable_dir / ('tea-symbolic.svg'),
   install_dir: get_option('datadir') / 'icons' / scalable_dir
 )
 
