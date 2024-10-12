@@ -56,7 +56,7 @@ class TeaButton(Gtk.ToggleButton):
 
         minutes, seconds = divmod(self.time_left, 60)
         self.timerLabel.set_text(f"{minutes}:{seconds:02}")
-        self.time_left -= 1
+
 
 
         if self.time_left == 0:
@@ -67,6 +67,7 @@ class TeaButton(Gtk.ToggleButton):
             self.timerLabel.set_text(f"0:00")
 
             return False  # Detiene el temporizador
+        self.time_left -= 1
         return True  # Continúa el temporizador
 
     def on_task_completed(self, task, result):
