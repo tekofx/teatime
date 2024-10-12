@@ -47,7 +47,5 @@ class TeatimeWindow(Adw.ApplicationWindow):
         ]
 
         for tea in teas:
-            teaButton = TeaButton(tea,self.timerLabel)
+            teaButton = TeaButton(tea, self.timerLabel)
             self.box.append(teaButton)
-
-

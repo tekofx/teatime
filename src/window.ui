@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
     <property name="valign">start</property>
     <property name="default-width">600</property>
@@ -41,13 +41,9 @@
               <object class="GtkAspectFrame">
                 <property name="ratio">1.3333</property>
                 <child>
-                  <object class="GtkFrame">
-                    <child>
-                      <object class="GtkLabel" id="timerLabel">
-                        <property name="css-classes">timerLabel</property>
-                        <property name="label">0:00</property>
-                      </object>
-                    </child>
+                  <object class="GtkLabel" id="timerLabel">
+                    <property name="css-classes">timerLabel</property>
+                    <property name="label">0:00</property>
                   </object>
                 </child>
               </object>
@@ -65,8 +61,6 @@
               </object>
             </child>
           </object>
-
-
         </child>
 
 
@@ -90,4 +84,3 @@
     </section>
   </menu>
 </interface>
-

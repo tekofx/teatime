@@ -4,10 +4,8 @@
 #
 
 
-import inspect
-from typing import List
 from gi.repository import Adw
-from gi.repository import Gtk, GLib, Gio, Notify, GdkPixbuf
+from gi.repository import Gtk, GLib, Gio, Notify
 from .tea import Tea
 
 
@@ -19,29 +17,30 @@ class TeaButton(Gtk.ToggleButton):
     teaLabel = Gtk.Template.Child()
     teaInfoLabel = Gtk.Template.Child()
 
-    def __init__(self, tea:Tea, timerLabel:Gtk.Label):
+    def __init__(self, tea: Tea, timerLabel: Gtk.Label):
         super().__init__()
         Notify.init("Tea Time")
-        self.tea=tea
+        self.tea = tea
         self.teaIcon.set_from_icon_name("tea-symbolic")
-        self.teaLabel.set_markup(f"<span size='large' foreground='{tea.color}'>{tea.name}</span>")
-        self.teaInfoLabel.set_markup(f"<span size='large' foreground='{tea.color}'>{tea.time} {tea.temperature}</span>")
-        self.timerLabel=timerLabel
+        self.teaLabel.set_markup(
+            f"<span size='large' foreground='{tea.color}'>{tea.name}</span>"
+        )
+        self.teaInfoLabel.set_markup(
+            f"<span size='large' foreground='{tea.color}'>{tea.time} {tea.temperature}</span>"
+        )
+        self.timerLabel = timerLabel
 
         self.connect("clicked", self.on_button_clicked)
-        target=Adw.CallbackAnimationTarget.new(self.animate_opacity)
-        spring_params=Adw.SpringParams(0,0.1,1)
-        self.animation=Adw.SpringAnimation.new(self.timerLabel, 0.5,1,spring_params, target)
-
+        target = Adw.CallbackAnimationTarget.new(self.animate_opacity)
+        spring_params = Adw.SpringParams(0, 0.1, 1)
+        self.animation = Adw.SpringAnimation.new(
+            self.timerLabel, 0.5, 1, spring_params, target
+        )
 
     def animate_opacity(self, value):
-        print(value)
         self.timerLabel.set_opacity(value)
 
-
-
     def on_button_clicked(self, widget):
-
         notification = Notify.Notification.new(f"Temporizador de {self.tea.time}")
         notification.show()
         self.animation.play()
@@ -49,15 +48,12 @@ class TeaButton(Gtk.ToggleButton):
         self.time_left = self.tea.time_seconds
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
-        #self.update_label(self.task, widget)  # Llama a update_label inmediatamente
+        self.update_label(self.task, widget)  # Llama a update_label inmediatamente
         GLib.timeout_add_seconds(1, self.update_label, self.task, widget)
 
     def update_label(self, task, widget):
-
         minutes, seconds = divmod(self.time_left, 60)
         self.timerLabel.set_text(f"{minutes}:{seconds:02}")
-
-
 
         if self.time_left == 0:
             task.return_boolean(True)
@@ -73,4 +69,3 @@ class TeaButton(Gtk.ToggleButton):
     def on_task_completed(self, task, result):
         self.animation.pause()
         self.timerLabel.set_opacity(1)
-
