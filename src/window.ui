@@ -24,6 +24,10 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <property name="margin-bottom">20</property>
+            <property name="margin-end">20</property>
+            <property name="margin-start">20</property>
+            <property name="margin-top">20</property>
             <property name="spacing">10</property>
             <child>
               <object class="GtkLabel">
@@ -31,13 +35,14 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="timerLabel">
-                <property name="margin-end">200</property>
-                <property name="margin-start">200</property>
-                <property name="label">0:00</property>
-                <style>
-                  <class name="timer"/>
-                </style>
+              <object class="GtkFrame">
+                <child>
+                  <object class="GtkLabel" id="timerLabel">
+                    <property name="label">0:00</property>
+                    <property name="margin-end">200</property>
+                    <property name="margin-start">200</property>
+                  </object>
+                </child>
               </object>
             </child>
 
