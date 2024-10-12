@@ -31,6 +31,7 @@ teatime_sources = [
   'main.py',
   'window.py',
   'tea.py',
+
 ]
 
 install_data(teatime_sources, install_dir: moduledir)

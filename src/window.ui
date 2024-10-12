@@ -7,6 +7,7 @@
     <property name="default-height">300</property>
     <property name="content">
       <object class="AdwToolbarView">
+
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
             <child type="end">
@@ -23,11 +24,23 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <property name="spacing">10</property>
             <child>
               <object class="GtkLabel">
                 <property name="label">Elige un té para empezar a contar</property>
               </object>
             </child>
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="margin-end">200</property>
+                <property name="margin-start">200</property>
+                <property name="label">0:00</property>
+                <style>
+                  <class name="timer" />
+                </style>
+              </object>
+            </child>
+
             <child>
               <object class="GtkFlowBox" id="box">
                 <property name="column-spacing">5</property>

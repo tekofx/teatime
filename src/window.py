@@ -27,8 +27,9 @@ from .tea import Tea
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")
 class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
-    box2 = Gtk.Template.Child()
+
     box = Gtk.Template.Child()
+    label=Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -48,7 +49,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
             box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
             # Añadir icono
-            icon = Gtk.Image.new_from_icon_name("tea-symbolic")
+            icon = Gtk.Image.new_from_file("test.jpg")
             icon.set_icon_size(Gtk.IconSize.LARGE)
             box.append(icon)
 
@@ -80,14 +81,14 @@ class TeatimeWindow(Adw.ApplicationWindow):
     def update_label(self, task, widget, tea):
 
         minutes, seconds = divmod(self.time_left, 60)
-        self.label.set_text(f"Tiempo restante: {minutes:02}:{seconds:02}")
+        self.label.set_text(f"{minutes}:{seconds:02}")
         self.time_left -= 1
         if self.time_left == 0:
             task.return_boolean(True)
             notification = Notify.Notification.new(f"Tu {tea.name} está listo")
             notification.show()
             widget.set_active(False)
-            self.label.set_text(f"Tu {tea.name} está listo")
+            self.label.set_text(f"0:00")
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
 
