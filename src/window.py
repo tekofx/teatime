@@ -22,6 +22,7 @@ from typing import List
 from gi.repository import Adw
 from gi.repository import Gtk, GLib, Gio, Notify, GdkPixbuf
 from .tea import Tea
+from .tea_button import TeaButton
 
 
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")
@@ -29,7 +30,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
 
     box = Gtk.Template.Child()
-    label = Gtk.Template.Child()
+    timerLabel = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -46,50 +47,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
         ]
 
         for tea in teas:
-            button = Gtk.ToggleButton()
-            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            teaButton = TeaButton(tea,self.timerLabel)
+            self.box.append(teaButton)
 
-            icon = Gtk.Image.new_from_icon_name("tea-symbolic")
-            icon.set_icon_size(Gtk.IconSize.LARGE)
-            box.append(icon)
 
-            # Añadir texto con formato
-            label = Gtk.Label()
-
-            markup = f"<span size='large' foreground='{tea.color}'>{tea.name}</span>\n<span>{tea.time} {tea.temperature}ºC</span>"
-            label.set_markup(markup)
-            box.append(label)
-
-            button.set_child(box)
-
-            button.connect("clicked", self.on_button_clicked, tea)
-            self.box.append(button)
-
-    def on_button_clicked(self, widget, tea):
-
-        notification = Notify.Notification.new(f"Temporizador de {tea.time}")
-        notification.show()
-
-        self.time_left = tea.time_seconds
-        self.task = Gio.Task.new(self, None, self.on_task_completed)
-        self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task, widget, tea)  # Llama a update_label inmediatamente
-        GLib.timeout_add_seconds(1, self.update_label, self.task, widget, tea)
-
-    def update_label(self, task, widget, tea):
-
-        minutes, seconds = divmod(self.time_left, 60)
-        self.label.set_text(f"{minutes}:{seconds:02}")
-        self.time_left -= 1
-        if self.time_left == 0:
-            task.return_boolean(True)
-            notification = Notify.Notification.new(f"Tu {tea.name} está listo")
-            notification.show()
-            widget.set_active(False)
-            self.label.set_text(f"0:00")
-            return False  # Detiene el temporizador
-        return True  # Continúa el temporizador
-
-    def on_task_completed(self, task, result):
-        if task.propagate_boolean(result):
-            self.label.set_text("Tiempo completado")

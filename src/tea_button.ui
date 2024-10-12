@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Cambalache 0.92.0 -->
+<interface>
+  <!-- interface-name test.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <template class="TeaButton" parent="GtkToggleButton">
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
+        <child>
+          <object class="GtkImage" id="teaIcon">
+            <property name="icon-name">system-search</property>
+            <property name="icon-size">large</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="teaLabel">
+            <property name="label">Té Verde</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="teaInfoLabel">
+            <property name="label">Té Verde</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+

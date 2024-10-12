@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0" />
-  <requires lib="Adw" version="1.0" />
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
     <property name="default-width">600</property>
     <property name="default-height">300</property>
@@ -31,12 +31,12 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="label">
+              <object class="GtkLabel" id="timerLabel">
                 <property name="margin-end">200</property>
                 <property name="margin-start">200</property>
                 <property name="label">0:00</property>
                 <style>
-                  <class name="timer" />
+                  <class name="timer"/>
                 </style>
               </object>
             </child>
@@ -44,8 +44,10 @@
             <child>
               <object class="GtkFlowBox" id="box">
                 <property name="column-spacing">5</property>
+                <property name="selection-mode">none</property>
                 <property name="homogeneous">True</property>
                 <property name="max-children-per-line">5</property>
+                <property name="row-spacing">5</property>
 
               </object>
             </child>
@@ -75,3 +77,4 @@
     </section>
   </menu>
 </interface>
+
