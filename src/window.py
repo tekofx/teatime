@@ -38,7 +38,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
         Notify.init("Tea Time")
 
         teas: List[Tea] = [
-            Tea("Té Verde", 0, 3, 80, "#32a852"),
+            Tea("Té Verde", 0, 5, 80, "#32a852"),
             Tea("Té Negro", 4, 0, 100, "#575958"),
             Tea("Té Oolong", 4, 0, 100, "#779bbf"),
             Tea("Té Rojo", 4, 30, 95, "#bf7791"),

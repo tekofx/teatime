@@ -49,7 +49,7 @@ class TeaButton(Gtk.ToggleButton):
         self.time_left = self.tea.time_seconds
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task, widget)  # Llama a update_label inmediatamente
+        #self.update_label(self.task, widget)  # Llama a update_label inmediatamente
         GLib.timeout_add_seconds(1, self.update_label, self.task, widget)
 
     def update_label(self, task, widget):
@@ -65,11 +65,11 @@ class TeaButton(Gtk.ToggleButton):
             notification.show()
             widget.set_active(False)
             self.timerLabel.set_text(f"0:00")
-            self.animation.stop()
+
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
 
     def on_task_completed(self, task, result):
-        if task.propagate_boolean(result):
-            self.timerLabel.set_text("Tiempo completado")
+        self.animation.pause()
+        self.timerLabel.set_opacity(1)
 
