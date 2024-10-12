@@ -3,10 +3,12 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
+    <property name="valign">start</property>
     <property name="default-width">600</property>
     <property name="default-height">300</property>
     <property name="content">
       <object class="AdwToolbarView">
+        <property name="valign">start</property>
 
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
@@ -24,6 +26,7 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <property name="valign">start</property>
             <property name="margin-bottom">20</property>
             <property name="margin-end">20</property>
             <property name="margin-start">20</property>
@@ -54,9 +57,10 @@
               <object class="GtkFlowBox" id="box">
                 <property name="column-spacing">5</property>
                 <property name="selection-mode">none</property>
-                <property name="homogeneous">True</property>
-                <property name="max-children-per-line">5</property>
+                <property name="homogeneous">False</property>
+                <property name="max-children-per-line">10</property>
                 <property name="row-spacing">5</property>
+                <property name="valign">start</property>
 
               </object>
             </child>
