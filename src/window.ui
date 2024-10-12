@@ -35,12 +35,21 @@
               </object>
             </child>
             <child>
-              <object class="GtkFrame">
+              <object class="AdwClamp">
+                <property name="maximum-size">100</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="timerLabel">
-                    <property name="label">0:00</property>
+                  <object class="GtkFrame">
                     <property name="margin-end">200</property>
                     <property name="margin-start">200</property>
+                    <child>
+                      <object class="GtkLabel" id="timerLabel">
+                        <property name="css-classes">timerLabel</property>
+                        <property name="label">2:00</property>
+                        <property name="margin-end">200</property>
+                        <property name="margin-start">200</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>

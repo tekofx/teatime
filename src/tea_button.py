@@ -29,12 +29,22 @@ class TeaButton(Gtk.ToggleButton):
         self.timerLabel=timerLabel
 
         self.connect("clicked", self.on_button_clicked)
+        target=Adw.CallbackAnimationTarget.new(self.animate_opacity)
+        spring_params=Adw.SpringParams(0,0.1,1)
+        self.animation=Adw.SpringAnimation.new(self.timerLabel, 0.5,1,spring_params, target)
+
+
+    def animate_opacity(self, value):
+        print(value)
+        self.timerLabel.set_opacity(value)
+
 
 
     def on_button_clicked(self, widget):
 
         notification = Notify.Notification.new(f"Temporizador de {self.tea.time}")
         notification.show()
+        self.animation.play()
 
         self.time_left = self.tea.time_seconds
         self.task = Gio.Task.new(self, None, self.on_task_completed)
@@ -47,12 +57,15 @@ class TeaButton(Gtk.ToggleButton):
         minutes, seconds = divmod(self.time_left, 60)
         self.timerLabel.set_text(f"{minutes}:{seconds:02}")
         self.time_left -= 1
+
+
         if self.time_left == 0:
             task.return_boolean(True)
             notification = Notify.Notification.new(f"Tu {self.tea.name} está listo")
             notification.show()
             widget.set_active(False)
             self.timerLabel.set_text(f"0:00")
+            self.animation.stop()
             return False  # Detiene el temporizador
         return True  # Continúa el temporizador
 
