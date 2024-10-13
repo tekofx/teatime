@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.92.0" target_tk="gtk-4.0">
+  <ui>
+	(8,1,"window.ui","src/window.ui",None,None,None,None,None,None,None),
+	(9,1,"test.ui","src/tea_button.ui",None,None,None,None,None,None,None)
+  </ui>
+  <ui_library>
+	(8,"Adw","1.0",None),
+	(8,"gtk","4.0",None),
+	(9,"gtk","4.12",None)
+  </ui_library>
+  <css>
+	(1,"style.css",None,0)
+  </css>
+  <object>
+	(8,1,"AdwApplicationWindow","TeatimeWindow",None,None,None,None,0,None,None),
+	(8,2,"AdwToolbarView",None,1,None,None,None,0,None,None),
+	(8,3,"AdwHeaderBar","header_bar",2,None,"top",None,0,None,None),
+	(8,4,"GtkMenuButton",None,3,None,"end",None,0,None,None),
+	(8,5,"GtkBox","box",2,None,None,None,1,None,None),
+	(8,6,"GtkLabel",None,5,None,None,None,0,None,None),
+	(8,7,"GtkAspectFrame",None,5,None,None,None,1,None,None),
+	(8,8,"GtkLabel","timerLabel",7,None,None,None,0,None,None),
+	(8,9,"GtkFlowBox","flowBox",5,None,None,None,2,None,None),
+	(8,10,"(menu)","primary_menu",None,None,None,None,1,None,None),
+	(8,11,"(section)",None,10,None,None,None,0,None,None),
+	(8,12,"(item)",None,11,None,None,None,0,None,None),
+	(8,13,"(item)",None,11,None,None,None,1,None,None),
+	(8,14,"(item)",None,11,None,None,None,2,None,None),
+	(8,15,"TeaButton",None,9,None,None,None,0,None,None),
+	(9,1,"GtkToggleButton","TeaButton",None,None,None,None,0,None,None),
+	(9,2,"GtkBox",None,1,None,None,None,0,None,None),
+	(9,3,"GtkImage","teaIcon",2,None,None,None,0,None,None),
+	(9,4,"GtkLabel","teaLabel",2,None,None,None,1,None,None),
+	(9,5,"GtkLabel","teaInfoLabel",2,None,None,None,2,None,None)
+  </object>
+  <object_property>
+	(8,1,"AdwApplicationWindow","content",None,0,None,None,None,2,None,None,None,None),
+	(8,1,"GtkApplicationWindow","show-menubar","True",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkWidget","valign","start",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkWindow","default-height","300",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkWindow","default-width","600",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkWindow","icon-name","dev.tekofx.TeaTime.svg",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkWindow","title","Tea Time",0,None,None,None,None,None,None,None,None),
+	(8,2,"GtkWidget","valign","start",0,None,None,None,None,None,None,None,None),
+	(8,2,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(8,4,"GtkMenuButton","icon-name","open-menu-symbolic",0,None,None,None,None,None,None,None,None),
+	(8,4,"GtkMenuButton","menu-model","10",0,None,None,None,None,None,None,None,None),
+	(8,4,"GtkMenuButton","primary","True",0,None,None,None,None,None,None,None,None),
+	(8,4,"GtkWidget","tooltip-text","Menu",1,None,None,None,None,None,None,None,None),
+	(8,5,"GtkBox","spacing","10",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkOrientable","orientation","vertical",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","margin-bottom","20",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","margin-end","20",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","margin-start","20",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","margin-top","20",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","valign","start",0,None,None,None,None,None,None,None,None),
+	(8,5,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
+	(8,6,"GtkLabel","label","Elige un té para empezar a contar",0,None,None,None,None,None,None,None,None),
+	(8,7,"GtkAspectFrame","ratio","1.3333",0,None,None,None,None,None,None,None,None),
+	(8,8,"GtkLabel","justify","center",0,None,None,None,None,None,None,None,None),
+	(8,8,"GtkLabel","label","0:00",0,None,None,None,None,None,None,None,None),
+	(8,8,"GtkWidget","css-classes","timerLabel",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkFlowBox","column-spacing","5",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkFlowBox","homogeneous","True",None,None,None,None,None,None,None,None,None),
+	(8,9,"GtkFlowBox","max-children-per-line","10",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkFlowBox","row-spacing","5",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkFlowBox","selection-mode","none",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkWidget","height-request","0",None,None,None,None,None,None,None,None,None),
+	(8,9,"GtkWidget","valign","start",0,None,None,None,None,None,None,None,None),
+	(8,9,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
+	(8,12,"(item)","action","app.preferences",0,None,None,None,None,None,None,None,None),
+	(8,12,"(item)","label","_Preferences",1,None,None,None,None,None,None,None,None),
+	(8,13,"(item)","action","win.show-help-overlay",0,None,None,None,None,None,None,None,None),
+	(8,13,"(item)","label","_Keyboard Shortcuts",1,None,None,None,None,None,None,None,None),
+	(8,14,"(item)","action","app.about",0,None,None,None,None,None,None,None,None),
+	(8,14,"(item)","label","_About TeaTime",1,None,None,None,None,None,None,None,None),
+	(9,2,"GtkBox","spacing","10",0,None,None,None,None,None,None,None,None),
+	(9,2,"GtkOrientable","orientation","vertical",0,None,None,None,None,None,None,None,None),
+	(9,2,"GtkWidget","margin-bottom","20",0,None,None,None,None,None,None,None,None),
+	(9,2,"GtkWidget","margin-end","20",0,None,None,None,None,None,None,None,None),
+	(9,2,"GtkWidget","margin-start","20",0,None,None,None,None,None,None,None,None),
+	(9,2,"GtkWidget","margin-top","20",0,None,None,None,None,None,None,None,None),
+	(9,3,"GtkImage","icon-name","tea-symbolic",0,None,None,None,None,None,None,None,None),
+	(9,3,"GtkImage","icon-size","large",0,None,None,None,None,None,None,None,None),
+	(9,4,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None),
+	(9,5,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None)
+  </object_property>
+</cambalache-project>
