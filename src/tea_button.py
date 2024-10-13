@@ -26,7 +26,7 @@ class TeaButton(Gtk.ToggleButton):
             f"<span size='large' foreground='{tea.color}'>{tea.name}</span>"
         )
         self.teaInfoLabel.set_markup(
-            f"<span size='large' foreground='{tea.color}'>{tea.time} {tea.temperature}</span>"
+            f"<span size='large' foreground='{tea.color}'>{tea.time}   {tea.temperature}ºC</span>"
         )
         self.timerLabel = timerLabel
 

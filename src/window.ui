@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Cambalache 0.92.1 -->
 <interface>
-  <requires lib="gtk" version="4.0" />
-  <requires lib="Adw" version="1.0" />
+  <!-- interface-name window.ui -->
+  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="gio" version="2.0"/>
+  <requires lib="libadwaita" version="1.4"/>
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
-    <property name="valign">start</property>
-    <property name="default-width">600</property>
-    <property name="default-height">300</property>
     <property name="content">
       <object class="AdwToolbarView">
         <property name="valign">start</property>
-
+        <property name="vexpand">True</property>
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
             <child type="end">
               <object class="GtkMenuButton">
-                <property name="primary">True</property>
                 <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Menu</property>
                 <property name="menu-model">primary_menu</property>
+                <property name="primary">True</property>
+                <property name="tooltip-text" translatable="yes">Menu</property>
               </object>
             </child>
           </object>
         </child>
-
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="valign">start</property>
+          <object class="GtkBox" id="box">
             <property name="margin-bottom">20</property>
             <property name="margin-end">20</property>
             <property name="margin-start">20</property>
             <property name="margin-top">20</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">10</property>
+            <property name="valign">start</property>
+            <property name="vexpand">True</property>
             <child>
               <object class="GtkLabel">
                 <property name="label">Elige un té para empezar a contar</property>
@@ -43,44 +44,53 @@
                 <child>
                   <object class="GtkLabel" id="timerLabel">
                     <property name="css-classes">timerLabel</property>
+                    <property name="justify">center</property>
                     <property name="label">0:00</property>
                   </object>
                 </child>
               </object>
             </child>
-
             <child>
-              <object class="GtkFlowBox" id="box">
+              <object class="GtkFlowBox" id="flowBox">
                 <property name="column-spacing">5</property>
-                <property name="selection-mode">none</property>
-                <property name="homogeneous">False</property>
+                <property name="height-request">0</property>
+                <property name="homogeneous">True</property>
                 <property name="max-children-per-line">10</property>
                 <property name="row-spacing">5</property>
+                <property name="selection-mode">none</property>
                 <property name="valign">start</property>
-
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="TeaButton"/>
+                </child>
               </object>
             </child>
           </object>
         </child>
-
-
       </object>
     </property>
+    <property name="default-height">300</property>
+    <property name="default-width">600</property>
+    <property name="icon-name">dev.tekofx.TeaTime.svg</property>
+    <property name="show-menubar">True</property>
+    <property name="title">Tea Time</property>
+    <property name="valign">start</property>
   </template>
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
         <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_About TeaTime</attribute>
         <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">_About TeaTime</attribute>
       </item>
     </section>
   </menu>
 </interface>
+

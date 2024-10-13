@@ -29,23 +29,24 @@ from .tea_button import TeaButton
 class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
 
-    box = Gtk.Template.Child()
+    flowBox = Gtk.Template.Child()
+    box=Gtk.Template.Child()
     timerLabel = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("Tea Time")
         Notify.init("Tea Time")
-
         teas: List[Tea] = [
-            Tea("Té Verde", 0, 5, 80, "#32a852"),
+            Tea("Té Verde", 2, 30, 80, "#32a852"),
             Tea("Té Negro", 4, 0, 100, "#575958"),
             Tea("Té Oolong", 4, 0, 100, "#779bbf"),
             Tea("Té Rojo", 4, 30, 95, "#bf7791"),
             Tea("Té Blanco", 5, 0, 80, "#f7f7f7"),
-            Tea("Té Menta", 5, 0, 80, "#f7f7f7"),
+            Tea("Té Menta", 4, 0, 80, "#f7f7f7"),
         ]
 
         for tea in teas:
             teaButton = TeaButton(tea, self.timerLabel)
-            self.box.append(teaButton)
+            self.flowBox.append(teaButton)
+
