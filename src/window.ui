@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.92.1 -->
 <interface>
   <!-- interface-name window.ui -->
@@ -9,6 +9,7 @@
   <template class="TeatimeWindow" parent="AdwApplicationWindow">
     <property name="content">
       <object class="AdwToolbarView">
+        <property name="hexpand">True</property>
         <property name="valign">start</property>
         <property name="vexpand">True</property>
         <child type="top">
@@ -51,17 +52,41 @@
               </object>
             </child>
             <child>
-              <object class="GtkFlowBox" id="flowBox">
-                <property name="column-spacing">5</property>
-                <property name="height-request">0</property>
-                <property name="homogeneous">True</property>
-                <property name="max-children-per-line">10</property>
-                <property name="row-spacing">5</property>
-                <property name="selection-mode">none</property>
-                <property name="valign">start</property>
-                <property name="vexpand">True</property>
+              <object class="GtkScrolledWindow">
+                <property name="max-content-height">800</property>
+                <property name="min-content-height">200</property>
                 <child>
-                  <object class="TeaButton"/>
+                  <object class="GtkFlowBox" id="flowBox">
+                    <property name="column-spacing">5</property>
+                    <property name="height-request">0</property>
+                    <property name="homogeneous">True</property>
+                    <property name="max-children-per-line">5</property>
+                    <property name="min-children-per-line">2</property>
+                    <property name="row-spacing">6</property>
+                    <property name="selection-mode">none</property>
+                    <property name="valign">start</property>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                    <child>
+                      <object class="TeaButton"/>
+                    </child>
+                  </object>
                 </child>
               </object>
             </child>
@@ -75,6 +100,7 @@
     <property name="show-menubar">True</property>
     <property name="title">Tea Time</property>
     <property name="valign">start</property>
+    <property name="vexpand">True</property>
   </template>
   <menu id="primary_menu">
     <section>
@@ -93,4 +119,3 @@
     </section>
   </menu>
 </interface>
-
