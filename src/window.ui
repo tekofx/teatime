@@ -54,38 +54,22 @@
             <child>
               <object class="GtkScrolledWindow">
                 <property name="max-content-height">800</property>
-                <property name="min-content-height">200</property>
+                <property name="min-content-height">310</property>
+                <property name="propagate-natural-height">True</property>
+                <property name="valign">start</property>
+                <property name="vexpand">True</property>
                 <child>
                   <object class="GtkFlowBox" id="flowBox">
                     <property name="column-spacing">5</property>
+                    <property name="halign">center</property>
                     <property name="height-request">0</property>
+                    <property name="hexpand">True</property>
                     <property name="homogeneous">True</property>
-                    <property name="max-children-per-line">5</property>
-                    <property name="min-children-per-line">2</property>
+                    <property name="max-children-per-line">8</property>
+                    <property name="min-children-per-line">1</property>
                     <property name="row-spacing">6</property>
                     <property name="selection-mode">none</property>
                     <property name="valign">start</property>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
-                    <child>
-                      <object class="TeaButton"/>
-                    </child>
                   </object>
                 </child>
               </object>

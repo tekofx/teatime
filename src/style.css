@@ -1,3 +1,8 @@
 .timerLabel {
     font-size: 6em;
+    background-color:  #72d869;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
+
