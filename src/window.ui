@@ -43,10 +43,16 @@
               <object class="GtkAspectFrame">
                 <property name="ratio">1.3333</property>
                 <child>
-                  <object class="GtkLabel" id="timerLabel">
-                    <property name="css-classes">timerLabel</property>
-                    <property name="justify">center</property>
-                    <property name="label">0:00</property>
+                  <object class="GtkBox">
+                    <child>
+                      <object class="GtkLabel" id="timerLabel">
+                        <property name="css-classes">timerLabel</property>
+                        <property name="justify">center</property>
+                        <property name="label">0:00</property>
+                        <property name="max-width-chars">5</property>
+                        <property name="width-chars">5</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -60,14 +66,14 @@
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkFlowBox" id="flowBox">
-                    <property name="column-spacing">5</property>
+                    <property name="column-spacing">10</property>
                     <property name="halign">center</property>
                     <property name="height-request">0</property>
                     <property name="hexpand">True</property>
                     <property name="homogeneous">True</property>
                     <property name="max-children-per-line">8</property>
                     <property name="min-children-per-line">1</property>
-                    <property name="row-spacing">6</property>
+                    <property name="row-spacing">10</property>
                     <property name="selection-mode">none</property>
                     <property name="valign">start</property>
                   </object>
@@ -85,6 +91,7 @@
     <property name="title">Tea Time</property>
     <property name="valign">start</property>
     <property name="vexpand">True</property>
+    <property name="width-request">400</property>
   </template>
   <menu id="primary_menu">
     <section>
@@ -102,4 +109,7 @@
       </item>
     </section>
   </menu>
+  <object class="GtkSizeGroup"/>
+  <object class="GtkSizeGroup"/>
+  <object class="GtkSizeGroup"/>
 </interface>

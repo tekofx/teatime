@@ -41,8 +41,6 @@ class TeaButton(Gtk.ToggleButton):
         self.timerLabel.set_opacity(value)
 
     def on_button_clicked(self, widget):
-        notification = Notify.Notification.new(f"Temporizador de {self.tea.time}")
-        notification.show()
         self.animation.play()
 
         self.time_left = self.tea.time_seconds
