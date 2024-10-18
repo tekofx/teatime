@@ -55,8 +55,8 @@ class TeaButton(Gtk.ToggleButton):
 
         if self.time_left == 0:
             task.return_boolean(True)
-            notification = Notify.Notification.new(f"Tu {self.tea.name} está listo")
-            notification.show()
+            Notify.Notification.new(f"Tu {self.tea.name.lower()} está listo","Ya puedes disfrutarlo").show()
+
             widget.set_active(False)
             self.timerLabel.set_text(f"0:00")
 
