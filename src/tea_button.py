@@ -18,10 +18,13 @@ class TeaButton(Gtk.ToggleButton):
     teaInfoLabel = Gtk.Template.Child()
     button_active = False
     timeout_id = None
-    def __init__(self, tea: Tea, timerLabel: Gtk.Label):
+    currently_active_button = None
+
+    def __init__(self, tea: Tea, timerLabel: Gtk.Label, current_active_button):
         super().__init__()
         Notify.init("Tea Time")
         self.tea = tea
+        self.current_active_button = current_active_button
         self.teaIcon.set_from_icon_name("tea-symbolic")
         self.teaLabel.set_markup(
             f"<span size='large' foreground='{tea.color}'>{tea.name}</span>"
@@ -42,26 +45,43 @@ class TeaButton(Gtk.ToggleButton):
     def animate_opacity(self, value):
         self.timerLabel.set_opacity(value)
 
+    def disable_button(self, widget):
+        self.animation.pause()
+        self.timerLabel.set_opacity(1)  # Reset the animation to initial state
+        self.timerLabel.set_text("0:00")
+
+        self.button_active = False
+        print("2 "+str(self.timeout_id))
+        if self.timeout_id:
+            print(74)
+            GLib.source_remove(self.timeout_id)
+            self.timeout_id = None
+        self.time_left = self.tea.time_seconds
+
+    def enable_button(self, widget):
+        self.button_active = True
+        self.current_active_button=self
+        self.animation.play()
+        self.task = Gio.Task.new(self, None, self.on_task_completed)
+        self.task.set_task_data(self.time_left, None)
+        self.update_label(self.task, widget)  # Llama a update_label inmediatamente
+        self.timeout_id = GLib.timeout_add_seconds(
+           1, self.update_label, self.task, widget
+        )
+        print("1 "+str(self.timeout_id))
+
     def on_button_clicked(self, widget):
         if self.button_active:
-            self.animation.pause()
-            self.timerLabel.set_opacity(1) # Reset the animation to initial state
-            self.timerLabel.set_text("0:00")
-
-            self.button_active=False
-            if self.timeout_id:
-                GLib.source_remove(self.timeout_id)
-                self.timeout_id = None
-            self.time_left = self.tea.time_seconds
-
+            self.disable_button(widget)
 
         else:
-            self.button_active=True
-            self.animation.play()
-            self.task = Gio.Task.new(self, None, self.on_task_completed)
-            self.task.set_task_data(self.time_left, None)
-            self.update_label(self.task, widget)  # Llama a update_label inmediatamente
-            self.timeout_id = GLib.timeout_add_seconds(1, self.update_label, self.task, widget)
+
+            # Deactivate the currently active button if there is one
+            if TeaButton.currently_active_button is not None:
+                TeaButton.currently_active_button.set_active(False)
+                TeaButton.currently_active_button.disable_button(widget)
+            self.enable_button(widget)
+            TeaButton.currently_active_button = self
 
     def update_label(self, task, widget):
         minutes, seconds = divmod(self.time_left, 60)
@@ -69,7 +89,9 @@ class TeaButton(Gtk.ToggleButton):
 
         if self.time_left == 0:
             task.return_boolean(True)
-            Notify.Notification.new(f"Tu {self.tea.name.lower()} está listo","Ya puedes disfrutarlo").show()
+            Notify.Notification.new(
+                f"Tu {self.tea.name.lower()} está listo", "Ya puedes disfrutarlo"
+            ).show()
 
             widget.set_active(False)
             self.timerLabel.set_text(f"0:00")
@@ -81,3 +103,4 @@ class TeaButton(Gtk.ToggleButton):
     def on_task_completed(self, task, result):
         self.animation.pause()
         self.timerLabel.set_opacity(1)
+        self.currently_active_button = None

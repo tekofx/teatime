@@ -37,10 +37,11 @@ class TeatimeWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("Tea Time")
+        self.current_active_button=None
         Notify.init("Tea Time")
         teas: List[Tea] = [
             Tea("Té Verde", 0, 10, 80, "#32a852"),
-            Tea("Té Negro", 4, 0, 100, "#575958"),
+            Tea("Té Negro", 0, 5, 100, "#575958"),
             Tea("Té Oolong", 4, 0, 100, "#779bbf"),
             Tea("Té Rojo", 4, 30, 95, "#bf7791"),
             Tea("Té Blanco", 5, 0, 80, "#f7f7f7"),
@@ -48,6 +49,6 @@ class TeatimeWindow(Adw.ApplicationWindow):
         ]
 
         for tea in teas:
-            teaButton = TeaButton(tea, self.timerLabel)
+            teaButton = TeaButton(tea, self.timerLabel, self.current_active_button)
             self.flowBox.append(teaButton)
 
