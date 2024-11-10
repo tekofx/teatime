@@ -33,6 +33,7 @@ class TeatimeWindow(Adw.ApplicationWindow):
     box=Gtk.Template.Child()
     timerLabel = Gtk.Template.Child()
 
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("Tea Time")

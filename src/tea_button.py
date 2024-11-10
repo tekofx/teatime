@@ -16,7 +16,8 @@ class TeaButton(Gtk.ToggleButton):
     teaIcon = Gtk.Template.Child()
     teaLabel = Gtk.Template.Child()
     teaInfoLabel = Gtk.Template.Child()
-
+    button_active = False
+    timeout_id = None
     def __init__(self, tea: Tea, timerLabel: Gtk.Label):
         super().__init__()
         Notify.init("Tea Time")
@@ -29,6 +30,7 @@ class TeaButton(Gtk.ToggleButton):
             f"<span size='large' foreground='{tea.color}'>{tea.time}   {tea.temperature}ºC</span>"
         )
         self.timerLabel = timerLabel
+        self.time_left = self.tea.time_seconds
 
         self.connect("clicked", self.on_button_clicked)
         target = Adw.CallbackAnimationTarget.new(self.animate_opacity)
@@ -41,13 +43,25 @@ class TeaButton(Gtk.ToggleButton):
         self.timerLabel.set_opacity(value)
 
     def on_button_clicked(self, widget):
-        self.animation.play()
+        if self.button_active:
+            self.animation.pause()
+            self.timerLabel.set_opacity(1) # Reset the animation to initial state
+            self.timerLabel.set_text("0:00")
 
-        self.time_left = self.tea.time_seconds
-        self.task = Gio.Task.new(self, None, self.on_task_completed)
-        self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task, widget)  # Llama a update_label inmediatamente
-        GLib.timeout_add_seconds(1, self.update_label, self.task, widget)
+            self.button_active=False
+            if self.timeout_id:
+                GLib.source_remove(self.timeout_id)
+                self.timeout_id = None
+            self.time_left = self.tea.time_seconds
+
+
+        else:
+            self.button_active=True
+            self.animation.play()
+            self.task = Gio.Task.new(self, None, self.on_task_completed)
+            self.task.set_task_data(self.time_left, None)
+            self.update_label(self.task, widget)  # Llama a update_label inmediatamente
+            self.timeout_id = GLib.timeout_add_seconds(1, self.update_label, self.task, widget)
 
     def update_label(self, task, widget):
         minutes, seconds = divmod(self.time_left, 60)
