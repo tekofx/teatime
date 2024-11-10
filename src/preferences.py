@@ -1,3 +1,4 @@
+import inspect
 import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
@@ -7,13 +8,17 @@ from gi.repository import Adw
 class PreferencesWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'PreferencesWindow'
 
-    preferences_page = Gtk.Template.Child()
-    preferences_group = Gtk.Template.Child()
-    action_row = Gtk.Template.Child()
+
     combo_row = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        print("PreferencesWindow initialized")
+        print(combo_row.id)
+        self.combo_row.connect("notify::selected", self.on_combo_row_selected)
+
+    def on_combo_row_selected(self, combo_row, param):
+        print(f"Selected: {combo_row.get_selected_item().get_string()}")
 
     def open(self):
         self.present()

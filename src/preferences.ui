@@ -2,13 +2,13 @@
 <!-- Created with Cambalache 0.92.2 -->
 <interface>
   <requires lib="libadwaita" version="1.2"/>
-  <object class="AdwPreferencesWindow" id="preferences_window">
-    <child>
-      <object class="AdwPreferencesPage" id="preferences_page">
+  <template class="PreferencesWindow" parent="AdwPreferencesWindow">
+    <property name="content">
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="AdwPreferencesGroup" id="preferences_group">
+          <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwActionRow" id="action_row">
+              <object class="AdwActionRow">
                 <property name="title">Language</property>
                 <child>
                   <object class="AdwComboRow" id="combo_row"/>
@@ -18,6 +18,6 @@
           </object>
         </child>
       </object>
-    </child>
-  </object>
+    </property>
+  </template>
 </interface>

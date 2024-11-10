@@ -4,7 +4,7 @@
   <ui>
 	(8,1,"window.ui","src/window.ui",None,None,None,None,None,None,None),
 	(9,1,"test.ui","src/tea_button.ui",None,None,None,None,None,None,None),
-	(13,None,None,"src/preferences.ui",None,None,None,None,None,None,None)
+	(13,1,None,"src/preferences.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(8,"Adw","1.0",None),
@@ -38,11 +38,11 @@
 	(9,13,"GtkImage","teaIcon",12,None,None,None,0,None,None),
 	(9,14,"GtkLabel","teaLabel",12,None,None,None,1,None,None),
 	(9,15,"GtkLabel","teaInfoLabel",12,None,None,None,2,None,None),
-	(13,1,"AdwPreferencesWindow","preferences_window",None,None,None,None,0,None,None),
-	(13,2,"AdwPreferencesPage","preferences_page",1,None,None,None,0,None,None),
-	(13,3,"AdwPreferencesGroup","preferences_group",2,None,None,None,0,None,None),
-	(13,4,"AdwActionRow","action_row",3,None,None,None,0,None,None),
-	(13,5,"AdwComboRow","combo_row",4,None,None,None,0,None,None)
+	(13,1,"AdwPreferencesWindow","PreferencesWindow",None,None,None,None,0,None,None),
+	(13,6,"AdwPreferencesPage",None,1,None,None,None,0,None,None),
+	(13,7,"AdwPreferencesGroup",None,6,None,None,None,0,None,None),
+	(13,8,"AdwActionRow",None,7,None,None,None,0,None,None),
+	(13,9,"AdwComboRow","combo_row",8,None,None,None,0,None,None)
   </object>
   <object_property>
 	(8,1,"AdwApplicationWindow","content",None,0,None,None,None,2,None,None,None,None),
@@ -104,6 +104,7 @@
 	(9,13,"GtkImage","pixel-size","70",None,None,None,None,None,None,None,None,None),
 	(9,14,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None),
 	(9,15,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None),
-	(13,4,"AdwPreferencesRow","title","Language",0,None,None,None,None,None,None,None,None)
+	(13,1,"AdwWindow","content",None,None,None,None,None,6,None,None,None,None),
+	(13,8,"AdwPreferencesRow","title","Language",0,None,None,None,None,None,None,None,None)
   </object_property>
 </cambalache-project>
