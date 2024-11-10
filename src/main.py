@@ -26,7 +26,7 @@ gi.require_version("Notify", "0.7")
 
 from .window import TeatimeWindow
 from gi.repository import Gio, Adw
-
+from .preferences import PreferencesWindow
 
 class TeatimeApplication(Adw.Application):
     """The main application singleton class."""
@@ -66,7 +66,10 @@ class TeatimeApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print("app.preferences action activated")
+
+        prefs_win = PreferencesWindow()
+        prefs_win.set_application(self)
+        prefs_win.open()
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.

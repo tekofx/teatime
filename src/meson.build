@@ -31,7 +31,8 @@ teatime_sources = [
   'main.py',
   'window.py',
   'tea.py',
-  'tea_button.py'
+  'tea_button.py',
+  'preferences.py'
 
 ]
 

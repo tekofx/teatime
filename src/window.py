@@ -23,6 +23,9 @@ from gi.repository import Adw
 from gi.repository import Gtk, GLib, Gio, Notify, GdkPixbuf
 from .tea import Tea
 from .tea_button import TeaButton
+import gettext
+
+_ = gettext.gettext
 
 
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")
@@ -30,25 +33,24 @@ class TeatimeWindow(Adw.ApplicationWindow):
     __gtype_name__ = "TeatimeWindow"
 
     flowBox = Gtk.Template.Child()
-    box=Gtk.Template.Child()
+    box = Gtk.Template.Child()
     timerLabel = Gtk.Template.Child()
-
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("Tea Time")
-        self.current_active_button=None
+        self.current_active_button = None
         Notify.init("Tea Time")
         teas: List[Tea] = [
-            Tea("Té Verde", 0, 10, 80, "#32a852"),
-            Tea("Té Negro", 0, 5, 100, "#575958"),
-            Tea("Té Oolong", 4, 0, 100, "#779bbf"),
-            Tea("Té Rojo", 4, 30, 95, "#bf7791"),
-            Tea("Té Blanco", 5, 0, 80, "#f7f7f7"),
-            Tea("Té Menta", 4, 0, 80, "#f7f7f7"),
+            Tea(_("Green Tea"), 2, 30, 80, "#32a852"),
+            Tea(_("Black Tea"), 4, 0, 100, "#575958"),
+            Tea(_("Oolong Tea"), 4, 0, 100, "#779bbf"),
+            Tea(_("Red Tea"), 4, 30, 95, "#bf7791"),
+            Tea(_("Rooibos"), 3, 0, 100, "#bf7791"),
+            Tea(_("White Tea"), 5, 0, 80, "#f7f7f7"),
+            Tea(_("Mint Tea"), 4, 0, 80, "#f7f7f7"),
         ]
 
         for tea in teas:
             teaButton = TeaButton(tea, self.timerLabel, self.current_active_button)
             self.flowBox.append(teaButton)
-

@@ -7,6 +7,9 @@
 from gi.repository import Adw
 from gi.repository import Gtk, GLib, Gio, Notify
 from .tea import Tea
+import gettext
+
+_ = gettext.gettext
 
 
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/tea_button.ui")
@@ -51,7 +54,6 @@ class TeaButton(Gtk.ToggleButton):
         self.timerLabel.set_text("0:00")
 
         self.button_active = False
-        print("2 "+str(self.timeout_id))
         if self.timeout_id:
             print(74)
             GLib.source_remove(self.timeout_id)
@@ -60,22 +62,20 @@ class TeaButton(Gtk.ToggleButton):
 
     def enable_button(self, widget):
         self.button_active = True
-        self.current_active_button=self
+        self.current_active_button = self
         self.animation.play()
         self.task = Gio.Task.new(self, None, self.on_task_completed)
         self.task.set_task_data(self.time_left, None)
-        self.update_label(self.task, widget)  # Llama a update_label inmediatamente
+        self.update_label(self.task, widget)  # Call update_label now
         self.timeout_id = GLib.timeout_add_seconds(
-           1, self.update_label, self.task, widget
+            1, self.update_label, self.task, widget
         )
-        print("1 "+str(self.timeout_id))
 
     def on_button_clicked(self, widget):
         if self.button_active:
             self.disable_button(widget)
 
         else:
-
             # Deactivate the currently active button if there is one
             if TeaButton.currently_active_button is not None:
                 TeaButton.currently_active_button.set_active(False)
@@ -90,7 +90,8 @@ class TeaButton(Gtk.ToggleButton):
         if self.time_left == 0:
             task.return_boolean(True)
             Notify.Notification.new(
-                f"Tu {self.tea.name.lower()} está listo", "Ya puedes disfrutarlo"
+                _("Your %(tea_name)s is ready") % {"tea_name": self.tea.name},
+                _("Enjoy it"),
             ).show()
 
             widget.set_active(False)
