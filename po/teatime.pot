@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-10 23:46+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/dev.tekofx.TeaTime.desktop.in:3
+msgid "Tea Time"
+msgstr ""
+
+#: data/dev.tekofx.TeaTime.metainfo.xml.in:7
+msgid "No description"
+msgstr ""
+
+#: src/window.py:45
+msgid "Green Tea"
+msgstr ""
+
+#: src/window.py:46
+msgid "Black Tea"
+msgstr ""
+
+#: src/window.py:47
+msgid "Oolong Tea"
+msgstr ""
+
+#: src/window.py:48
+msgid "Red Tea"
+msgstr ""
+
+#: src/window.py:49
+msgid "Rooibos"
+msgstr ""
+
+#: src/window.py:50
+msgid "White Tea"
+msgstr ""
+
+#: src/window.py:51
+msgid "Mint Tea"
+msgstr ""
+
+#: src/window.ui:22
+msgid "Menu"
+msgstr ""
+
+#: src/window.ui:100
+msgid "_Preferences"
+msgstr ""
+
+#: src/window.ui:104
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: src/window.ui:108
+msgid "_About TeaTime"
+msgstr ""
+
+#: src/tea_button.py:93
+#, python-format
+msgid "Your %(tea_name)s is ready"
+msgstr ""
+
+#: src/tea_button.py:94
+msgid "Enjoy it"
+msgstr ""

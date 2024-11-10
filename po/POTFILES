@@ -4,3 +4,5 @@ data/dev.tekofx.TeaTime.gschema.xml
 src/main.py
 src/window.py
 src/window.ui
+src/tea_button.py
+src/tea_button.ui
