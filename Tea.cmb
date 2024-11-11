@@ -9,7 +9,9 @@
   <ui_library>
 	(8,"Adw","1.0",None),
 	(8,"gtk","4.0",None),
-	(9,"gtk","4.12",None)
+	(9,"gtk","4.12",None),
+	(13,"gtk","4.0",None),
+	(13,"libadwaita","1.6",None)
   </ui_library>
   <css>
 	(1,"style.css",None,0)
@@ -39,10 +41,10 @@
 	(9,14,"GtkLabel","teaLabel",12,None,None,None,1,None,None),
 	(9,15,"GtkLabel","teaInfoLabel",12,None,None,None,2,None,None),
 	(13,1,"AdwPreferencesWindow","PreferencesWindow",None,None,None,None,0,None,None),
-	(13,6,"AdwPreferencesPage",None,1,None,None,None,0,None,None),
-	(13,7,"AdwPreferencesGroup",None,6,None,None,None,0,None,None),
-	(13,8,"AdwActionRow",None,7,None,None,None,0,None,None),
-	(13,9,"AdwComboRow","combo_row",8,None,None,None,0,None,None)
+	(13,2,"AdwPreferencesPage",None,1,None,None,None,0,None,None),
+	(13,3,"AdwPreferencesGroup",None,2,None,None,None,0,None,None),
+	(13,7,"AdwComboRow","combo_row",3,None,None,None,0,None,None),
+	(13,8,"GtkStringList",None,7,None,None,None,0,None,None)
   </object>
   <object_property>
 	(8,1,"AdwApplicationWindow","content",None,0,None,None,None,2,None,None,None,None),
@@ -104,7 +106,13 @@
 	(9,13,"GtkImage","pixel-size","70",None,None,None,None,None,None,None,None,None),
 	(9,14,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None),
 	(9,15,"GtkLabel","label","Té Verde",0,None,None,None,None,None,None,None,None),
-	(13,1,"AdwWindow","content",None,None,None,None,None,6,None,None,None,None),
-	(13,8,"AdwPreferencesRow","title","Language",0,None,None,None,None,None,None,None,None)
+	(13,3,"AdwPreferencesGroup","title","General",None,None,None,None,None,None,None,None,None),
+	(13,7,"AdwComboRow","model",None,0,None,None,None,8,None,None,None,None),
+	(13,7,"AdwPreferencesRow","title","Language",0,None,None,None,None,None,None,None,None)
   </object_property>
+  <object_data>
+	(13,8,"GtkStringList",1,1,None,None,None,None,None,None),
+	(13,8,"GtkStringList",2,2,"English",1,None,0,None,None),
+	(13,8,"GtkStringList",2,3,"Español",1,None,0,None,None)
+  </object_data>
 </cambalache-project>

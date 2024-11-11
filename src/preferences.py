@@ -14,7 +14,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         print("PreferencesWindow initialized")
-        print(combo_row.id)
+
         self.combo_row.connect("notify::selected", self.on_combo_row_selected)
 
     def on_combo_row_selected(self, combo_row, param):
