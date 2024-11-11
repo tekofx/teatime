@@ -8,3 +8,5 @@ A description of this project.
  xgettext --files-from=po/POTFILES --from-code=UTF-8 --output po/teatime.pot
 ### Generate language translation file
 msginit --locale=es --input=po/teatime.pot --output=po/es.po
+### Generate .mo from .po
+msgfmt teatime.po -o teatime.mo

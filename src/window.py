@@ -24,8 +24,7 @@ from gi.repository import Gtk, GLib, Gio, Notify, GdkPixbuf
 from .tea import Tea
 from .tea_button import TeaButton
 import gettext
-
-_ = gettext.gettext
+from .preferences import _
 
 
 @Gtk.Template(resource_path="/dev/tekofx/TeaTime/window.ui")

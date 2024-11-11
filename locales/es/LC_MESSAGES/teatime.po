@@ -26,7 +26,7 @@ msgid "No description"
 msgstr ""
 
 #: src/window.py:45
-msgid "Té verde"
+msgid "Green Tea"
 msgstr ""
 
 #: src/window.py:46
