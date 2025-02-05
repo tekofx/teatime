@@ -12,7 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import dev.tekofx.teatime.AppViewModel
 import dev.tekofx.teatime.navigation.BottomNavigationBar
 import dev.tekofx.teatime.navigation.NavigationItem
 import dev.tekofx.teatime.navigation.SideNavigationBar
@@ -26,6 +28,7 @@ fun MainScaffold(
     isBottomBarVisible: Boolean,
     isMainScreenVisible: Boolean,
     onItemClick: (NavigationItem) -> Unit,
+    viewModel: AppViewModel
 ) {
     Row {
         AnimatedVisibility(
@@ -74,6 +77,7 @@ fun MainScaffold(
             RootNavGraph(
                 rootNavController = rootNavController,
                 innerPadding = innerPadding,
+                viewModel = viewModel
             )
         }
     }
