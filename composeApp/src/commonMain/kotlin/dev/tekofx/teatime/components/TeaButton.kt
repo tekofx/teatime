@@ -3,9 +3,9 @@ package dev.tekofx.teatime.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.primarySurface
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.kdroid.composenotification.builder.ExperimentalNotificationsApi
@@ -18,20 +18,19 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Composable
 fun TeaButton(
     tea: Tea,
-    viewModel: AppViewModel,
+    activeTea: Tea?,
+    setActiveTea: (Tea)->Unit,
     notificationMessage: String?,
     onShowMessage: (String?) -> Unit
 ) {
 
-    val activeTea = viewModel.activeTea.collectAsState()
 
     Button(
         onClick = {
-            viewModel.setActiveTea(tea)
-
+            setActiveTea(tea)
         },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = if (activeTea.value == tea) MaterialTheme.colors.surface else MaterialTheme.colors.primarySurface
+            backgroundColor = if (activeTea == tea) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.primary
         )
     ) {
         Column {

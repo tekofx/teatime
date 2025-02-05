@@ -30,6 +30,8 @@ actual fun AppTheme(
         else -> LightColorScheme
     }
 
+    println(dynamicColor)
+
     val view = LocalView.current
     if(!view.isInEditMode) {
         SideEffect {
