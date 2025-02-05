@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.kdroid.composenotification.builder.AndroidChannelConfig
@@ -27,7 +28,11 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
-            App(viewModel)
+            App(
+                darkTheme = isSystemInDarkTheme(),
+                dynamicColor = true,
+                viewModel = viewModel
+            )
         }
     }
 }

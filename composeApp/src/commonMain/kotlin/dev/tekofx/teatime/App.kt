@@ -15,9 +15,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun App(viewModel: AppViewModel) {
+fun App(
+    darkTheme:Boolean,
+    dynamicColor:Boolean,
+    viewModel: AppViewModel) {
 
-    TeatimeMaterialTheme {
+    AppTheme(
+        darkTheme = darkTheme,
+        dynamicColor = dynamicColor
+    ) {
         MainScreen(viewModel)
     }
 }
