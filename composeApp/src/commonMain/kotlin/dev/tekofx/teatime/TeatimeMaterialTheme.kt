@@ -12,7 +12,7 @@ val CustomSecondary = Color(0xFFEFB8C8)
 
 
 @Composable
-fun CustomMaterialTheme(content: @Composable () -> Unit) {
+fun TeatimeMaterialTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colors = MaterialTheme.colors.copy(
             primary = CustomPrimary,
