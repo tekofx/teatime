@@ -37,6 +37,15 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(libs.compose.native.notification)
+
+            // Material 3
+            implementation(compose.material3)
+
+            // Navigation
+            implementation(libs.navigation.compose)
+
+            // window-size
+            implementation(libs.screen.size)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
