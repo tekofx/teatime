@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun BottomNavigationBar(
@@ -25,7 +26,7 @@ fun BottomNavigationBar(
                 onClick = { onItemClick(navigationItem) },
                 icon = {
                     Icon(
-                        imageVector = if (navigationItem.route == currentRoute) navigationItem.selectedIcon else navigationItem.unSelectedIcon,
+                        painter = if (navigationItem.route == currentRoute) painterResource(navigationItem.selectedIcon) else painterResource(navigationItem.unSelectedIcon),
                         contentDescription = navigationItem.title,
                     )
                 },

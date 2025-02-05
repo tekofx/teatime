@@ -30,7 +30,6 @@ import dev.tekofx.teatime.navigation.Routes
 fun HomeScreen(
     rootNavController: NavController, paddingValues: PaddingValues
 ) {
-    var name by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -50,22 +49,6 @@ fun HomeScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        TextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(text = "Enter the name") }
-        )
-
-        Button(onClick = {
-        }) {
-            Text(
-                text = "Move to Home Detail Screen",
-                fontSize = 20.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
+        Text("Home")
     }
 }
