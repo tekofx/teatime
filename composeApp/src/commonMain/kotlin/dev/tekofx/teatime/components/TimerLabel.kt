@@ -1,4 +1,4 @@
-package dev.tekofx.teatime
+package dev.tekofx.teatime.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape

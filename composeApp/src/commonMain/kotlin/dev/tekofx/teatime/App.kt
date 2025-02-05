@@ -1,7 +1,5 @@
 package dev.tekofx.teatime
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -9,7 +7,6 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,11 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kdroid.composenotification.builder.getNotificationProvider
-import org.jetbrains.compose.resources.painterResource
+import dev.tekofx.teatime.components.TeaButton
+import dev.tekofx.teatime.components.TimerLabel
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import teatime.composeapp.generated.resources.Res
-import teatime.composeapp.generated.resources.compose_multiplatform
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -29,6 +24,7 @@ import teatime.composeapp.generated.resources.compose_multiplatform
 fun App(viewModel: AppViewModel) {
     val notificationProvider = getNotificationProvider()
     val teas = viewModel.teas.collectAsState()
+    val time=viewModel.formattedRemainingTime
     var notificationMessage by remember { mutableStateOf<String?>(null) }
     var permissionDenied by remember { mutableStateOf(false) }
 
@@ -40,7 +36,7 @@ fun App(viewModel: AppViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            TimerLabel(viewModel.formattedRemainingTime)
+            TimerLabel(time)
             if (permissionDenied) {
                 Text("Permission denied. Please enable notifications in settings.", color = Color.Red)
             }

@@ -1,4 +1,4 @@
-package dev.tekofx.teatime
+package dev.tekofx.teatime.model
 
 data class Tea(
     val id: Int,
