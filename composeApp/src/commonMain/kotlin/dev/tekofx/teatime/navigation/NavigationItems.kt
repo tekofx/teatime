@@ -19,9 +19,7 @@ data class NavigationItem(
 )
 sealed class Routes(var route: String) {
     data object Home : Routes("home")
-    data object Setting : Routes("setting")
-    data object HomeDetail : Routes("homeDetail")
-    data object SettingDetail : Routes("settingDetail")
+    data object Inventory : Routes("inventory")
 }
 
 val navigationItemsLists = listOf(
@@ -35,6 +33,6 @@ val navigationItemsLists = listOf(
         unSelectedIcon = Icons.Outlined.Search,
         selectedIcon = Icons.Filled.Search,
         title = "Setting",
-        route = Routes.Setting.route,
+        route = Routes.Inventory.route,
     ),
 )

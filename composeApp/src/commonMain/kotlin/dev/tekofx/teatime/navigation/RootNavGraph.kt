@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import dev.tekofx.teatime.navigation.Graph
 import dev.tekofx.teatime.navigation.Routes
+import dev.tekofx.teatime.screens.HomeScreen
+import dev.tekofx.teatime.screens.InventoryScreen
 
 @Composable
 fun RootNavGraph(
@@ -18,18 +20,6 @@ fun RootNavGraph(
         startDestination = Graph.NAVIGATION_BAR_SCREEN_GRAPH,
     ) {
         mainNavGraph(rootNavController = rootNavController, innerPadding = innerPadding)
-        composable(
-            route = Routes.HomeDetail.route,
-        ) {
-            rootNavController.previousBackStackEntry?.savedStateHandle?.get<String>("name")?.let { name ->
-               // HomeDetailScreen(rootNavController = rootNavController, name = name)
-            }
-        }
-        composable(
-            route = Routes.SettingDetail.route,
-        ) {
-            //SettingDetailScreen(rootNavController = rootNavController)
-        }
     }
 }
 fun NavGraphBuilder.mainNavGraph(
@@ -41,10 +31,10 @@ fun NavGraphBuilder.mainNavGraph(
         route = Graph.NAVIGATION_BAR_SCREEN_GRAPH
     ) {
         composable(route = Routes.Home.route) {
-            //HomeScreen(rootNavController = rootNavController, paddingValues = innerPadding)
+            HomeScreen(rootNavController = rootNavController, paddingValues = innerPadding)
         }
-        composable(route = Routes.Setting.route) {
-            //SettingScreen(rootNavController = rootNavController, paddingValues = innerPadding)
+        composable(route = Routes.Inventory.route) {
+            InventoryScreen(rootNavController = rootNavController, paddingValues = innerPadding)
         }
     }
 }
