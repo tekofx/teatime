@@ -11,7 +11,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import teatime.composeapp.generated.resources.Res
 import androidx.lifecycle.viewModelScope
 
-class AppViewModel():ViewModel() {
+class AppViewModel() : ViewModel() {
     private var timerJob: Job? = null
     private val _activeTea = MutableStateFlow<Tea?>(null)
     val activeTea = _activeTea.asStateFlow()
@@ -19,7 +19,7 @@ class AppViewModel():ViewModel() {
     private val _formattedTime = MutableStateFlow("0:00")
     val formattedTime = _formattedTime.asStateFlow()
 
-    private val _teas = MutableStateFlow<List<Tea>>(
+    private val _teas = MutableStateFlow(
         listOf(
             Tea(0, "Green Tea", 80, 3, 0, "1 cup"),
             Tea(1, "Black Tea", 100, 3, 0, "1 cup"),
@@ -27,36 +27,31 @@ class AppViewModel():ViewModel() {
             Tea(3, "White Tea", 70, 3, 0, "1 cup"),
             Tea(4, "Test", 70, 0, 5, "1 cup"),
 
-        )
+            )
     )
     val teas = _teas.asStateFlow()
-
-    fun setActiveTea(tea: Tea) {
-        startTimer(tea)
-    }
 
 
     private fun formatSeconds(seconds: Long) {
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
-        _formattedTime.value=String.format("%d:%02d", minutes, remainingSeconds)
+        _formattedTime.value = String.format("%d:%02d", minutes, remainingSeconds)
     }
 
     @OptIn(ExperimentalResourceApi::class, ExperimentalNotificationsApi::class)
-    private fun startTimer(tea: Tea) {
+     fun startTimer(tea: Tea) {
         if (_activeTea.value?.id == tea.id) {
             timerJob?.cancel()
             _activeTea.value = null
             return
-        } else {
-            _activeTea.value = tea
         }
 
-        _timer.value=tea.time.toLong()
+        _activeTea.value = tea
+        _timer.value = tea.time.toLong()
         formatSeconds(_timer.value)
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
-            while (_timer.value>0L) {
+            while (_timer.value > 0L) {
                 delay(1000)
                 _timer.value--
                 formatSeconds(_timer.value)
@@ -66,10 +61,7 @@ class AppViewModel():ViewModel() {
                 message = "Timer for ${tea.name} finished",
                 largeImage = Res.getUri("drawable/tea.png")
             )
-            _activeTea.value=null
-
+            _activeTea.value = null
         }
-
-
     }
 }

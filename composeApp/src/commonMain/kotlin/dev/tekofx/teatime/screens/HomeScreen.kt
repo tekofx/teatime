@@ -14,7 +14,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,7 +47,6 @@ fun HomeScreen(
 
     // Notifications
     val notificationProvider = getNotificationProvider()
-    var notificationMessage by remember { mutableStateOf<String?>(null) }
     var permissionDenied by remember { mutableStateOf(false) }
 
 
@@ -88,9 +86,7 @@ fun HomeScreen(
                 TeaButton(
                     tea = tea,
                     activeTea = activeTea,
-                    setActiveTea = {viewModel.setActiveTea(tea)},
-                    notificationMessage = notificationMessage,
-                    onShowMessage = { message -> notificationMessage = message }
+                    onClick = {viewModel.startTimer(tea)},
                 )
             }
         }
