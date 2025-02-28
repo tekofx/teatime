@@ -7,15 +7,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.kdroid.composenotification.builder.AndroidChannelConfig
 import com.kdroid.composenotification.builder.NotificationInitializer.notificationInitializer
 
 class MainActivity : ComponentActivity() {
-    private val viewModel = AppViewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val androidTimerManager = AndroidTimerManager(this)
+        val viewModel = AppViewModel(androidTimerManager)
 
         notificationInitializer(
             defaultChannelConfig = AndroidChannelConfig(

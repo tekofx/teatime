@@ -42,7 +42,6 @@ fun InventoryScreen(
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Text("Inventory of teas")
 
     }
 }

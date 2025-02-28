@@ -6,13 +6,14 @@ import androidx.compose.runtime.setValue
 import com.kdroid.composenotification.builder.ExperimentalNotificationsApi
 import com.kdroid.composenotification.builder.Notification
 import dev.tekofx.teatime.model.Tea
+import dev.tekofx.teatime.model.TimerManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import teatime.composeapp.generated.resources.Res
 
-class AppViewModel() {
+class AppViewModel(private val timerManager: TimerManager) {
     private var timerJob: Job? = null
 
     val activeTea = MutableStateFlow<Tea?>(null)
@@ -54,29 +55,11 @@ class AppViewModel() {
             return
         } else {
             activeTea.value = tea
-            Notification(
-                title = "Timer Started",
-                message = "Timer for ${tea.name} started",
-                largeImage = Res.getUri("drawable/tea.png")
-            )
         }
-
 
         val timeInMillis = tea.time.toLong() * 1000
         remainingTime = timeInMillis
 
-        timerJob?.cancel()
-        timerJob = CoroutineScope(Dispatchers.Main).launch {
-            while (remainingTime > 0) {
-                delay(1000)
-                remainingTime -= 1000
-            }
-            Notification(
-                title = "Timer Finished",
-                message = "Timer for ${tea.name} finished",
-                largeImage = Res.getUri("drawable/tea.png")
-            )
-            activeTea.value = null
-        }
+        timerManager.startTimer(tea.name, timeInMillis)
     }
 }
