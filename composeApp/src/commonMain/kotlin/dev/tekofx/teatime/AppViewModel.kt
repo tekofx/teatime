@@ -1,8 +1,6 @@
 package dev.tekofx.teatime
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import com.kdroid.composenotification.builder.ExperimentalNotificationsApi
 import com.kdroid.composenotification.builder.Notification
 import dev.tekofx.teatime.model.Tea
@@ -12,11 +10,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import teatime.composeapp.generated.resources.Res
+import androidx.lifecycle.viewModelScope
 
-class AppViewModel(private val timerManager: TimerManager) {
+class AppViewModel(private val timerManager: TimerManager):ViewModel() {
     private var timerJob: Job? = null
-
-    val activeTea = MutableStateFlow<Tea?>(null)
+    private val _activeTea = MutableStateFlow<Tea?>(null)
+    val activeTea = _activeTea.asStateFlow()
+    private val _timer = MutableStateFlow(0L)
+    val timer = _timer.asStateFlow()
 
     private val _teas = MutableStateFlow<List<Tea>>(
         listOf(
@@ -30,36 +31,36 @@ class AppViewModel(private val timerManager: TimerManager) {
     )
     val teas = _teas.asStateFlow()
 
-    private var remainingTime by mutableStateOf(0L)
-
-    val formattedRemainingTime: String
-        get() = formatTime(remainingTime)
-
     fun setActiveTea(tea: Tea) {
         startTimer(tea)
     }
 
-    private fun formatTime(timeInMillis: Long): String {
-        val totalSeconds = timeInMillis / 1000
-        val minutes = totalSeconds / 60
-        val seconds = totalSeconds % 60
-        return String.format("%d:%02d", minutes, seconds)
-    }
-
     @OptIn(ExperimentalResourceApi::class, ExperimentalNotificationsApi::class)
     private fun startTimer(tea: Tea) {
-        if (activeTea.value?.id == tea.id) {
+        if (_activeTea.value?.id == tea.id) {
             timerJob?.cancel()
-            activeTea.value = null
-            remainingTime = 0
+            _activeTea.value = null
             return
         } else {
-            activeTea.value = tea
+            _activeTea.value = tea
         }
 
-        val timeInMillis = tea.time.toLong() * 1000
-        remainingTime = timeInMillis
+        _timer.value=tea.time.toLong()
+        timerJob?.cancel()
+        timerJob = viewModelScope.launch {
+            while (_timer.value>0L) {
+                delay(1000)
+                _timer.value--
+            }
+            Notification(
+                title = "Timer Finished",
+                message = "Timer for ${tea.name} finished",
+                largeImage = Res.getUri("drawable/tea.png")
+            )
+            _activeTea.value=null
 
-        timerManager.startTimer(tea.name, timeInMillis)
+        }
+
+
     }
 }

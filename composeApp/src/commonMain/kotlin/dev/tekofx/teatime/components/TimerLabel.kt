@@ -10,14 +10,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TimerLabel(time: String) {
+fun TimerLabel(time: Long) {
+
+    fun formatTime(timeInMillis: Long): String {
+        val totalSeconds = timeInMillis / 1000
+        val minutes = totalSeconds / 60
+        val seconds = totalSeconds % 60
+        return String.format("%d:%02d", minutes, seconds)
+    }
+
     Surface(
         tonalElevation = 4.dp,
         shape = RoundedCornerShape(20.dp)
     ) {
         Text(
             modifier = Modifier.padding(20.dp),
-            text = time,
+            text = formatTime(time),
             fontSize = 80.sp
         )
     }

@@ -41,8 +41,8 @@ fun HomeScreen(
 ) {
 
     // Data
-    val teas = viewModel.teas.collectAsState()
-    val time = viewModel.formattedRemainingTime
+    val teas by viewModel.teas.collectAsState()
+    val timer by viewModel.timer.collectAsState()
 
     // Input
     val activeTea by viewModel.activeTea.collectAsState()
@@ -68,7 +68,7 @@ fun HomeScreen(
                 )
             }
         )
-        TimerLabel(time)
+        TimerLabel(timer)
 
         if (!notificationProvider.hasPermission()){
             notificationProvider.requestPermission(
@@ -84,7 +84,7 @@ fun HomeScreen(
 
 
         FlowRow {
-            teas.value.forEach { tea ->
+            teas.forEach { tea ->
                 TeaButton(
                     tea = tea,
                     activeTea = activeTea,
