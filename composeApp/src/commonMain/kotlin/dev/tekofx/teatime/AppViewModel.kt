@@ -18,6 +18,8 @@ class AppViewModel(private val timerManager: TimerManager):ViewModel() {
     val activeTea = _activeTea.asStateFlow()
     private val _timer = MutableStateFlow(0L)
     val timer = _timer.asStateFlow()
+    private val _formattedTime = MutableStateFlow("0:00")
+    val formattedTime = _formattedTime.asStateFlow()
 
     private val _teas = MutableStateFlow<List<Tea>>(
         listOf(
@@ -35,6 +37,13 @@ class AppViewModel(private val timerManager: TimerManager):ViewModel() {
         startTimer(tea)
     }
 
+
+    private fun formatSeconds(seconds: Long) {
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        _formattedTime.value=String.format("%d:%02d", minutes, remainingSeconds)
+    }
+
     @OptIn(ExperimentalResourceApi::class, ExperimentalNotificationsApi::class)
     private fun startTimer(tea: Tea) {
         if (_activeTea.value?.id == tea.id) {
@@ -46,11 +55,13 @@ class AppViewModel(private val timerManager: TimerManager):ViewModel() {
         }
 
         _timer.value=tea.time.toLong()
+        formatSeconds(_timer.value)
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
             while (_timer.value>0L) {
                 delay(1000)
                 _timer.value--
+                formatSeconds(_timer.value)
             }
             Notification(
                 title = "Timer Finished",

@@ -8,24 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
-fun TimerLabel(time: Long) {
-
-    fun formatTime(timeInMillis: Long): String {
-        val totalSeconds = timeInMillis / 1000
-        val minutes = totalSeconds / 60
-        val seconds = totalSeconds % 60
-        return String.format("%d:%02d", minutes, seconds)
-    }
-
+fun TimerLabel(time: String) {
     Surface(
         tonalElevation = 4.dp,
         shape = RoundedCornerShape(20.dp)
     ) {
         Text(
             modifier = Modifier.padding(20.dp),
-            text = formatTime(time),
+            text = time,
             fontSize = 80.sp
         )
     }
