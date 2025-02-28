@@ -26,7 +26,6 @@ class AppViewModel() : ViewModel() {
             Tea(2, "Oolong Tea", 90, 3, 0, "1 cup"),
             Tea(3, "White Tea", 70, 3, 0, "1 cup"),
             Tea(4, "Test", 70, 0, 5, "1 cup"),
-
             )
     )
     val teas = _teas.asStateFlow()
@@ -39,7 +38,7 @@ class AppViewModel() : ViewModel() {
     }
 
     @OptIn(ExperimentalResourceApi::class, ExperimentalNotificationsApi::class)
-     fun startTimer(tea: Tea) {
+    fun startTimer(tea: Tea) {
         if (_activeTea.value?.id == tea.id) {
             timerJob?.cancel()
             _activeTea.value = null
