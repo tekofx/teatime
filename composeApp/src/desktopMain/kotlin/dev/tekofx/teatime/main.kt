@@ -9,8 +9,7 @@ import teatime.composeapp.generated.resources.tea
 import teatime.composeapp.generated.resources.timer_filled
 
 fun main() = application {
-    val desktopTimerManager=DesktopTimerManager()
-     val viewModel = AppViewModel(desktopTimerManager)
+     val viewModel = AppViewModel()
     val icon= painterResource(Res.drawable.timer_filled)
 
     Window(

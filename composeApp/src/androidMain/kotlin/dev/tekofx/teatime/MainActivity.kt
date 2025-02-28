@@ -18,8 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val androidTimerManager = AndroidTimerManager(this)
-        val viewModel = AppViewModel(androidTimerManager)
+        val viewModel = AppViewModel()
 
         notificationInitializer(
             defaultChannelConfig = AndroidChannelConfig(

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.kdroid.composenotification.builder.ExperimentalNotificationsApi
 import com.kdroid.composenotification.builder.Notification
 import dev.tekofx.teatime.model.Tea
-import dev.tekofx.teatime.model.TimerManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,12 +11,11 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import teatime.composeapp.generated.resources.Res
 import androidx.lifecycle.viewModelScope
 
-class AppViewModel(private val timerManager: TimerManager):ViewModel() {
+class AppViewModel():ViewModel() {
     private var timerJob: Job? = null
     private val _activeTea = MutableStateFlow<Tea?>(null)
     val activeTea = _activeTea.asStateFlow()
     private val _timer = MutableStateFlow(0L)
-    val timer = _timer.asStateFlow()
     private val _formattedTime = MutableStateFlow("0:00")
     val formattedTime = _formattedTime.asStateFlow()
 
