@@ -1,6 +1,7 @@
 package dev.tekofx.teatime.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -34,7 +36,10 @@ import com.kdroid.composenotification.builder.getNotificationProvider
 import dev.tekofx.teatime.AppViewModel
 import dev.tekofx.teatime.components.TeaButton
 import dev.tekofx.teatime.components.TimerLabel
+import dev.tekofx.teatime.model.Tea
 import dev.tekofx.teatime.navigation.Routes
+import kotlinx.coroutines.flow.MutableStateFlow
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -74,7 +79,7 @@ fun HomeScreen(
         )
         TimerLabel(formattedTime)
 
-        if (!notificationProvider.hasPermission()){
+        if (!notificationProvider.hasPermission()) {
             notificationProvider.requestPermission(
                 onGranted = {
                     notificationProvider.updatePermissionState(true)
@@ -85,19 +90,22 @@ fun HomeScreen(
                 }
             )
         }
+
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 100.dp),
             verticalArrangement = Arrangement.spacedBy(5.dp),
-            horizontalArrangement = Arrangement.spacedBy(5.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            contentPadding = PaddingValues(10.dp)
         ) {
-            items(teas){tea->
+            items(teas) { tea ->
                 TeaButton(
                     tea = tea,
                     activeTea = activeTea,
-                    onClick = {viewModel.startTimer(tea)},
+                    onClick = { viewModel.startTimer(tea) },
                 )
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
+
