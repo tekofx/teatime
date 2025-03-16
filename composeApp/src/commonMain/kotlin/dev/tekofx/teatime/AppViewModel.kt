@@ -21,12 +21,13 @@ class AppViewModel() : ViewModel() {
 
     private val _teas = MutableStateFlow(
         listOf(
-            Tea(0, "Green Tea", 80, 3, 0, "1 cup"),
-            Tea(1, "Black Tea", 100, 3, 0, "1 cup"),
-            Tea(2, "Oolong Tea", 90, 3, 0, "1 cup"),
-            Tea(3, "White Tea", 70, 3, 0, "1 cup"),
+            Tea(0, "Green Tea", 80, 2, 30, "1 cup"),
+            Tea(2, "Oolong Tea", 100, 4, 0, "1 cup"),
+            Tea(1, "Pu'er", 95, 4, 30, "1 cup"),
+            Tea(1, "Black Tea", 100, 4, 0, "1 cup"),
+            Tea(3, "White Tea", 80, 5, 0, "1 cup"),
             Tea(4, "Test", 70, 0, 5, "1 cup"),
-            )
+        )
     )
     val teas = _teas.asStateFlow()
 
@@ -42,7 +43,7 @@ class AppViewModel() : ViewModel() {
         if (_activeTea.value?.id == tea.id) {
             timerJob?.cancel()
             _activeTea.value = null
-            _formattedTime.value="0:00"
+            _formattedTime.value = "0:00"
             return
         }
 
