@@ -28,12 +28,17 @@ fun TeaButton(
     activeTea: Tea?,
     onClick: (Tea)->Unit,
 ) {
+
+    val backgroundColor = if (activeTea == tea) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.primary
+    val textColor = if (activeTea == tea) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onPrimary
+
+
     Button(
         onClick = {
             onClick(tea)
         },
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = if (activeTea == tea) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.primary
+            backgroundColor = backgroundColor
         )
     ) {
         Column(
@@ -42,10 +47,11 @@ fun TeaButton(
             Icon(
                 modifier = Modifier.size(60.dp),
                 painter = painterResource(Res.drawable.emoji_food_beverage),
-                contentDescription = ""
+                contentDescription = "",
+                tint = textColor
             )
-            Text(tea.name)
-            Text("${tea.temperature} ª ${tea.formattedTime}")
+            Text(tea.name, color = textColor)
+            Text("${tea.temperature} ª ${tea.formattedTime}", color = textColor)
         }
     }
 }
