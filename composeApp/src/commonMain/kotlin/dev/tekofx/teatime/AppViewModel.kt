@@ -42,6 +42,7 @@ class AppViewModel() : ViewModel() {
         if (_activeTea.value?.id == tea.id) {
             timerJob?.cancel()
             _activeTea.value = null
+            _formattedTime.value="0:00"
             return
         }
 
