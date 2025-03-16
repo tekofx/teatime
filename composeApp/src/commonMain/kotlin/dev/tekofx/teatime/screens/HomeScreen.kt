@@ -109,7 +109,6 @@ fun HomeScreen(
         }
 
         LazyVerticalGrid(
-            modifier = Modifier.border(1.dp, Color.Red),
             columns = GridCells.Fixed( columns),
             verticalArrangement = Arrangement.spacedBy(5.dp),
             horizontalArrangement = Arrangement.spacedBy(5.dp),
