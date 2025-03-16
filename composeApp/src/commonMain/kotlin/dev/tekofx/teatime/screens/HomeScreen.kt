@@ -1,7 +1,9 @@
 package dev.tekofx.teatime.screens
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -20,6 +22,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
@@ -41,7 +47,9 @@ import dev.tekofx.teatime.navigation.Routes
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3WindowSizeClassApi::class
+)
 @Composable
 fun HomeScreen(
     rootNavController: NavController,
@@ -59,6 +67,15 @@ fun HomeScreen(
     // Notifications
     val notificationProvider = getNotificationProvider()
     var permissionDenied by remember { mutableStateOf(false) }
+
+    // Calculate window size class
+    val windowSizeClass = calculateWindowSizeClass()
+    val columns = when (windowSizeClass.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> 3
+        WindowWidthSizeClass.Medium -> 4
+        WindowWidthSizeClass.Expanded -> 4
+        else -> 2
+    }
 
 
     Column(
@@ -92,7 +109,8 @@ fun HomeScreen(
         }
 
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 100.dp),
+            modifier = Modifier.border(1.dp, Color.Red),
+            columns = GridCells.Fixed( columns),
             verticalArrangement = Arrangement.spacedBy(5.dp),
             horizontalArrangement = Arrangement.spacedBy(5.dp),
             contentPadding = PaddingValues(10.dp)
