@@ -22,11 +22,11 @@ class MainActivity : ComponentActivity() {
 
         notificationInitializer(
             defaultChannelConfig = AndroidChannelConfig(
-                channelId = "Notification Example 1",
-                channelName = "Notification Example 1",
-                channelDescription = "Notification Example 1",
-                channelImportance = NotificationManager.IMPORTANCE_DEFAULT,
-                smallIcon = android.R.drawable.ic_notification_overlay
+                channelId = "Brewing",
+                channelName = "Brewing",
+                channelDescription = "Notification when timer ends",
+                channelImportance = NotificationManager.IMPORTANCE_HIGH,
+                smallIcon =R.drawable.sym_def_app_icon
             )
         )
 
